@@ -29,8 +29,9 @@ Navigate to your current project directory for this case it will be **Login-Syst
 ### 1 .Fork the repository and Clone it into your local machine
 
 ```csharp
-git clone https://github.com/{your-Github-Username }/Login-System-with-Python-Flask-and-MySQL.git
+git clone https://github.com/Mohammadraza21/ProjectV2 }/Login-System-with-Python-Flask-and-MySQL.git
 ```
+
 
 ### 2 .Create an environment
 
