@@ -1,0 +1,134 @@
+{% extends 'trainer/layout.html' %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between  align-items-center ">
+    <h2>Classes</h2>
+    <button type="button" class="btn btn-outline-primary" id="add-class-btn">
+        Add New Class
+    </button>
+
+</div>
+<div id="class-table">
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Class Name</th>
+                    <th> Description</th>
+                    <th> Date</th>
+                    <th> Time </th>
+                    <th>Duration (min)</th>
+                    <th>Capacity</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for stat in stats %}
+                <tr>
+                    <td>{{ stat['class_name'] }}</td>
+                    <td>{{ stat['description'] }}</td>
+                    <td>{{ stat['class_date'] }}</td>
+                    <td>{{ stat['class_time'] }}</td>
+                    <td>{{ stat['duration_min'] }}</td>
+                    <td>{{ stat['max_capacity']}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<div id="class-form" style="display: none;">
+    <div class="row">
+        <div class="col-lg-7 mx-auto shadow-sm p-5">
+            <div class="tab-content">
+                <div id="nav-tab-card" class="tab-pane fade show active">
+                    <div class="msg">{{ msg }}</div>
+                    <form role="form" action="{{ url_for('class_management') }}" method="post">
+                        <div class="row">
+
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="class_name"></label>
+                                    <input type="text" id="class_name" name="class_name" placeholder="Class Name"
+                                        class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="max_capacity"></label>
+                                    <input type="number" id="max_capacity" name="max_capacity"
+                                        placeholder="Class Max Capacity" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="class_date"></label>
+                                    <input placeholder="Class Date" class="form-control" type="text"
+                                        onfocus="(this.type='date')" onblur="(this.type='text')" id="class_date"
+                                        name="class_date" required />
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="class_time"></label>
+                                    <input placeholder="Class Start Time" class="form-control" type="text"
+                                        onfocus="(this.type='time')" onblur="(this.type='text')" id="class_time"
+                                        name="class_time" required />
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="class_duration"></label>
+                                    <input type="number" step=".01" id="class_duration" name="class_duration"
+                                        placeholder="Class Duration" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="class_description"></label>
+                                    <textarea name="class_description" id="class_description"
+                                        placeholder="Class Description" class="form-control"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="d-flex justify-content-between">
+                                <button type="submit" class="btn btn-primary btn-sm">
+                                    Confirm
+                                </button>
+                                <button type="submit" class="btn btn-sm btn-outline-danger"
+                                    onclick="window.history.back();">
+                                    Cancel
+                                </button>
+                            </div>
+                        </div>
+
+
+                    </form>
+                </div>
+            </div>
+            <!-- End -->
+
+        </div>
+    </div>
+</div>
+<script>
+    const addButton = document.getElementById('add-class-btn');
+    const classForm = document.getElementById('class-form');
+    const classTable = document.getElementById('class-table');
+
+    addButton.addEventListener('click', () => {
+        classForm.style.display = 'block'; // Show the form
+        classTable.style.display = 'none'; // Show the form
+
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,132 @@
+{% extends 'trainer/layout.html' %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between  align-items-center ">
+    <h2>Schedules</h2>
+    <button type="button" class="btn btn-outline-primary" id="add-class-btn">
+        Add New Schedule
+    </button>
+
+</div>
+<div id="class-table">
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Day</th>
+                    <th>Class</th>
+                    <th>Date</th>
+                    <th>Start-End</th>
+                    <th>Session Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for slot in schedule %}
+                <tr>
+                    <td>{{ slot['class_day'] }}</td>
+                    <td>{{ slot['class_name'] }}</td>
+                    <td>{{ slot['session_date'] }}</td>
+                    <td>{{ slot['start_time']}} - {{slot['end_time'] }}</td>
+                    <td>{{ slot['session_type'] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<div id="class-form" style="display: none;">
+    <div class="row">
+        <div class="col-lg-7 mx-auto shadow-sm p-5">
+            <div class="tab-content">
+                <div id="nav-tab-card" class="tab-pane fade show active">
+                    <div class="msg">{{ msg }}</div>
+                    <form role="form" action="{{ url_for('schedule_management') }}" method="post">
+                        <div class="row">
+
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="session_type"></label>
+                                    <select class="form-control" name="session_type" id="session_type">
+                                        <option value="" disabled selected>Session Type</option>
+                                        <option value="Group Fitness Class">Group Fitness Class</option>
+                                        <option value="Personal Training">Personal Training</option>
+                                    </select>
+
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="class_id"></label>
+                                    <select class="form-control" name="class_id" id="class_id">
+                                        <option value="" disabled selected>Class Name</option>
+                                        {% for class in classes %}
+                                        <option value="{{ class.class_id }}">{{class.class_name}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="session_date"></label>
+                                    <input placeholder="Session Date" class="form-control" type="text"
+                                        onfocus="(this.type='date')" onblur="(this.type='text')" id="session_date"
+                                        name="session_date" required />
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="start_time"></label>
+                                    <input placeholder="Session Start Time" class="form-control" type="text"
+                                        onfocus="(this.type='time')" onblur="(this.type='text')" id="start_time"
+                                        name="start_time" required />
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="end_time"></label>
+                                    <input placeholder="Session End Time" class="form-control" type="text"
+                                        onfocus="(this.type='time')" onblur="(this.type='text')" id="end_time"
+                                        name="end_time" required />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="d-flex justify-content-between">
+                                <button type="submit" class="btn btn-primary btn-sm">
+                                    Confirm
+                                </button>
+                                <button type="submit" class="btn btn-sm btn-outline-danger"
+                                    onclick="window.history.back();">
+                                    Cancel
+                                </button>
+                            </div>
+                        </div>
+
+
+                    </form>
+                </div>
+            </div>
+            <!-- End -->
+
+        </div>
+    </div>
+</div>
+
+<script>
+    const addButton = document.getElementById('add-class-btn');
+    const classForm = document.getElementById('class-form');
+    const classTable = document.getElementById('class-table');
+
+    addButton.addEventListener('click', () => {
+        classForm.style.display = 'block'; // Show the form
+        classTable.style.display = 'none'; // Show the form
+
+    });
+</script>
+{% endblock %}

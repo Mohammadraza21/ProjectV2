@@ -1,0 +1,51 @@
+{% extends 'member/layout.html' %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between  align-items-center ">
+    <h2>Personal Workout Sessions</h2>
+    <button type="button" class="btn btn-outline-primary" id="add-class-btn">
+        Add New Session
+    </button>
+
+</div>
+<div id="class-table">
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Session Date</th>
+                    <th>Start Time</th>
+                    <th>End Time </th>
+                    <th>Trainer</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in sessions %}
+                <tr>
+                    <td>{{ item['session_date'] }}</td>
+                    <td>{{ item['start_time'] }}</td>
+                    <td>{{ item['end_time'] }}</td>
+                    <td>{{ item['Trainer'] }}</td>>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<script>
+    const addButton = document.getElementById('add-class-btn');
+    const classForm = document.getElementById('class-form');
+    const classTable = document.getElementById('class-table');
+
+    addButton.addEventListener('click', () => {
+        classForm.style.display = 'block'; // Show the form
+        classTable.style.display = 'none'; // Show the form
+
+    });
+</script>
+{% endblock %}

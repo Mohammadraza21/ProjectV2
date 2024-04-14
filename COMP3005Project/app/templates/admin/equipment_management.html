@@ -1,0 +1,116 @@
+{% extends 'admin/layout.html' %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between  align-items-center ">
+    <h2>Equipment maintenance records</h2>
+    <button type="button" class="btn btn-outline-primary" id="add-class-btn">
+        Add New Log
+    </button>
+
+</div>
+<div id="class-table">
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Equipment Name</th>
+                    <th>Current Condition</th>
+                    <th>Last Maintenance Date</th>
+                    <th>Description </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in equipments %}
+                <tr>
+                    <td>{{ item['equipment_name'] }}</td>
+                    <td>{{ item['current_condition'] }}</td>
+                    <td>{{ item['last_maintenance_date'] }}</td>
+                    <td>{{ item['last_maintenance_description'] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<div id="class-form" style="display: none;">
+    <div class="row">
+        <div class="col-lg-7 mx-auto shadow-sm p-5">
+            <div class="tab-content">
+                <div id="nav-tab-card" class="tab-pane fade show active">
+                    <div class="msg">{{ msg }}</div>
+                    <form role="form" action="{{ url_for('admin_equip_management') }}" method="post">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="equipment_name"></label>
+                                    <input type="text" id="equipment_name" name="equipment_name"
+                                        placeholder="Equipment Name" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="current_condition"></label>
+                                    <input type="text" id="current_condition" name="current_condition"
+                                        placeholder="Current condition" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="last_maintenance_date"></label>
+                                    <input placeholder="Last maintenance date" class="form-control" type="text"
+                                        onfocus="(this.type='date')" onblur="(this.type='text')"
+                                        id="last_maintenance_date" name="last_maintenance_date" required />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="last_maintenance_description"></label>
+                                    <textarea name="last_maintenance_description" id="last_maintenance_description"
+                                        placeholder="Last maintenance Description" class="form-control"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="d-flex justify-content-between">
+                                <button type="submit" class="btn btn-primary btn-sm">
+                                    Confirm
+                                </button>
+                                <button type="submit" class="btn btn-sm btn-outline-danger"
+                                    onclick="window.history.back();">
+                                    Cancel
+                                </button>
+                            </div>
+                        </div>
+
+
+                    </form>
+                </div>
+            </div>
+            <!-- End -->
+
+        </div>
+    </div>
+</div>
+<script>
+    const addButton = document.getElementById('add-class-btn');
+    const classForm = document.getElementById('class-form');
+    const classTable = document.getElementById('class-table');
+
+    addButton.addEventListener('click', () => {
+        classForm.style.display = 'block'; // Show the form
+        classTable.style.display = 'none'; // Show the form
+
+    });
+</script>
+{% endblock %}

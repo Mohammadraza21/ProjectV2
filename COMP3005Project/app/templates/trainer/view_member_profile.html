@@ -1,0 +1,61 @@
+{% extends 'trainer/layout.html' %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center ">
+    <div class="container">
+
+        <div class="row height d-flex justify-content-center align-items-center">
+
+            <div class="col-md-8">
+
+                <form class="search" role="form" action="{{ url_for('view_member_profile') }}" method="post">
+                    <i class="fa fa-search"></i>
+                    <input type="text" id="member_name" name="member_name" class="form-control"
+                        placeholder="Please enter member name">
+                    <button class="btn btn-primary">Search</button>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<div id="class-table">
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>email</th>
+                    <th>first_name</th>
+                    <th>last_name</th>
+                    <th>gender</th>
+                    <th>birthdate</th>
+                    <th>phone_number</th>
+                    <th>address</th>
+                    <th>registration_date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in data %}
+                <tr>
+                    <td>{{ item['email'] }}</td>
+                    <td>{{ item['first_name'] }}</td>
+                    <td>{{ item['last_name'] }}</td>
+                    <td>{{ item['gender'] }}</td>
+                    <td>{{ item['birthdate'] }}</td>
+                    <td>{{ item['phone_number'] }}</td>
+                    <td>{{ item['address'] }}</td>
+                    <td>{{ item['registration_date'] }}</td>
+
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+{% endblock %}

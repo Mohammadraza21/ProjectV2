@@ -1,0 +1,44 @@
+{% extends 'member/layout.html' %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+    {% include "includes/alert.html" %}
+
+    <div class="d-flex justify-content-between  align-items-center ">
+        <h2>Exercise Routines</h2>
+        <button type="button" class="btn btn-outline-primary" id="add-class-btn">
+            Add Routine
+        </button>
+    </div>
+
+    <div id="class-table">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Exercise </th>
+                        <th>Sets</th>
+                        <th>Reps</th>
+                        <th>Weight</th>
+                        <th>Day</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for stat in stats %}
+                    <tr>
+                        <td>{{stat['exercise_name']}}</td>
+                        <td>{{stat['sets']}}</td>
+                        <td>{{stat['reps']}}</td>
+                        <td>{{stat['weight']}}</td>
+                        <td>{{stat['day_of_week']}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    {% endblock %}

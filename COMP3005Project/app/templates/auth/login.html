@@ -1,0 +1,54 @@
+{% extends 'auth/auth_layout.html' %}
+{% block title %} {{ title }} {% endblock %}
+{% block content%}
+<div class="container py-5">
+    {% include "includes/alert.html" %}
+
+    <div class="row">
+        <div class="col-lg-7 mx-auto">
+            <div class="bg-white rounded-lg shadow-sm p-5">
+                <ul role="tablist" class="nav bg-light nav-pills rounded-pill nav-fill mb-3">
+                    <li class="nav-item">
+                        <a href="{{ url_for('login') }}" class="nav-link active rounded-pill">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for('register') }}" class="nav-link rounded-pill">Register</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div id="nav-tab-card" class="tab-pane fade show active">
+                        <div class="msg">{{ msg }}</div>
+                        <form role="form" action="{{ url_for('login') }}" method="post">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="username"></label>
+                                        <input type="text" id="username" name="username" placeholder="Username" required
+                                            class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="password"></label>
+                                        <input type="password" id="password" name="password" placeholder="Password"
+                                            required class="form-control">
+
+                                    </div>
+                                </div>
+                            </div>
+
+                    </div>
+                    <button type="submit" class="btn btn-primary shadow-sm mt-4">
+                        Login </button>
+                    </form>
+                </div>
+            </div>
+            <!-- End -->
+
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

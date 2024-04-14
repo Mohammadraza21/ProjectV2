@@ -1,0 +1,120 @@
+{% extends 'auth/auth_layout.html' %}
+{% block title %} {{ title }} {% endblock %}
+{% block content%}
+<div class="container py-5">
+    {% include "includes/alert.html" %}
+
+    <div class="row">
+        <div class="col-lg-7 mx-auto">
+            <div class="bg-white rounded-lg shadow-sm p-5">
+                <ul role="tablist" class="nav bg-light nav-pills rounded-pill nav-fill mb-3">
+                    <li class="nav-item">
+                        <a href="{{ url_for('login') }}" class="nav-link rounded-pill">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for('register') }}" class="nav-link active rounded-pill">Register</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div id="nav-tab-card" class="tab-pane fade show active">
+                        <div class="msg">{{ msg }}</div>
+                        <form role="form" action="{{ url_for('register') }}" method="post">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="firstname"></label>
+                                        <input type="text" id="firstname" name="firstname" required
+                                            placeholder="First Name" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="lastname"></label>
+                                        <input type="text" id="lastname" name="lastname" required
+                                            placeholder="Last Name" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="email"></label>
+                                        <input type="email" id="email" name="email" placeholder="Email Address" required
+                                            class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="phone_number"></label>
+                                        <input type="tel" id="phone_number" name="phone_number"
+                                            placeholder="Phone number" required class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="address"></label>
+                                        <input type="text" id="address" name="address" placeholder="Address Details"
+                                            class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="gender"></label>
+                                        <select class="form-control" name="gender" id="gender">
+                                            <option value="" disabled selected hidden> Gender</option>
+                                            <option value="female">Female</option>
+                                            <option value="male">Male</option>
+                                            <option value="unspecified">Prefer not to say</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="birthdate"></label>
+                                        <input placeholder="Date of Birth" class="form-control" type="text"
+                                            onfocus="(this.type='date')" onblur="(this.type='text')" id="birthdate"
+                                            name="birthdate" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="username"></label>
+                                        <input type="text" id="username" name="username" placeholder="Username" required
+                                            class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="password"></label>
+                                        <input type="password" id="password" name="password" placeholder="Password"
+                                            required class="form-control">
+
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="confirmpassword"></label>
+                                        <input type="password" id="confirmpassword" name="confirmpassword"
+                                            placeholder="Confirm Password" required class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary shadow-sm mt-4">
+                                Confirm </button>
+                        </form>
+                    </div>
+                </div>
+                <!-- End -->
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

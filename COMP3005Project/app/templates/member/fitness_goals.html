@@ -1,0 +1,132 @@
+{% extends 'member/layout.html' %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+    {% include "includes/alert.html" %}
+
+    <div class="d-flex justify-content-between  align-items-center ">
+        <h2>Fitness Goals</h2>
+        <button type="button" class="btn btn-outline-primary" id="add-class-btn">
+            Add Fitness Goals
+        </button>
+    </div>
+
+    <div id="class-table">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Goal Type</th>
+                        <th>Target Value</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Progress</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for stat in stats %}
+                    <tr>
+                        <td>{{stat['goal_type']}}</td>
+                        <td>{{stat['target_value']}}</td>
+                        <td>{{stat['start_date']}}</td>
+                        <td>{{stat['end_date']}}</td>
+                        <td>{{stat['progress']}}</td>
+                        <td>{{stat['notes']}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <div id="class-form" style="display: none">
+        <div class="row">
+            <div class="col-lg-7 mx-auto shadow-sm p-5">
+                <div class="tab-content">
+                    <div id="nav-tab-card" class="tab-pane fade show active">
+                        <div class="msg">{{ msg }}</div>
+                        <form role="form" action="{{ url_for('fitnessgoals') }}" method="post">
+                            <div class="row">
+
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="goal_type"></label>
+                                        <input type="text" id="goal_type" name="goal_type" placeholder="Goal Type"
+                                            class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="startdate"></label>
+                                        <input placeholder="Start Date" class="form-control" type="text"
+                                            onfocus="(this.type='date')" onblur="(this.type='text')" id="startdate"
+                                            name="startdate" required />
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="enddate"></label>
+                                        <input placeholder="End Date" class="form-control" type="text"
+                                            onfocus="(this.type='date')" onblur="(this.type='text')" id="enddate"
+                                            name="enddate" required />
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="target_value"></label>
+                                        <input type="number" step=".01" id="target_value" name="target_value"
+                                            placeholder="Target Value" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="progress"></label>
+                                        <input type="number" step=".01" id="progress" name="progress"
+                                            placeholder="Progress" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="goalnotes"></label>
+                                        <textarea name="goalnotes" id="goalnotes" placeholder="Notes"
+                                            class="form-control"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="submit"
+                                class="subscribe btn btn-primary btn-block rounded-pill shadow-sm mt-4">
+                                Confirm </button>
+                        </form>
+                    </div>
+                </div>
+                <!-- End -->
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const addButton = document.getElementById('add-class-btn');
+    const classForm = document.getElementById('class-form');
+    const classTable = document.getElementById('class-table');
+
+    addButton.addEventListener('click', () => {
+        classForm.style.display = 'block'; // Show the form
+        classTable.style.display = 'none'; // Show the form
+
+    });
+</script>
+{% endblock %}

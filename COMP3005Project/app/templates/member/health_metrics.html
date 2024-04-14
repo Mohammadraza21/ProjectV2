@@ -1,0 +1,153 @@
+{% extends 'member/layout.html' %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+    {% include "includes/alert.html" %}
+
+    <div class="d-flex justify-content-between  align-items-center ">
+        <h2>Health Statistics</h2>
+        <button type="button" class="btn btn-outline-primary" id="add-class-btn">
+            Add New Metrics
+        </button>
+
+    </div>
+    <div id="class-table">
+        <p>As recorded over time:</p>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Weight</th>
+                        <th>Height</th>
+                        <th>Body fat percentage</th>
+                        <th>Blood pressure systolic</th>
+                        <th>Blood pressure diastolic</th>
+                        <th>Resting heart rate</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for stat in stats %}
+                    <tr>
+                        <td>{{ stat['date'] }}</td>
+                        <td>{{ stat['weight'] }}</td>
+                        <td>{{ stat['height'] }}</td>
+                        <td>{{ stat['body_fat_percentage'] }}</td>
+                        <td>{{ stat['blood_pressure_systolic'], stats['blood_pressure_diastolic'] }}</td>
+                        <td>{{ stat['resting_heart_rate']}}</td>
+                        <td>{{ stat['notes']}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <div id="class-form" style="display: none">
+        <div class="row">
+            <div class="col-lg-7 mx-auto shadow-sm p-5">
+                <div class="tab-content">
+                    <div id="nav-tab-card" class="tab-pane fade show active">
+                        <div class="msg">{{ msg }}</div>
+                        <form role="form" action="{{ url_for('healthmetrics') }}" method="post">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="date"></label>
+                                        <input placeholder="Date" class="form-control" type="text"
+                                            onfocus="(this.type='date')" onblur="(this.type='text')" id="date"
+                                            name="date" required />
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="weight"></label>
+                                        <input type="number" step=".01" id="weight" name="weight"
+                                            placeholder="Body Weight (lbs)" class="form-control">
+
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="height"></label>
+                                        <input type="number" step=".01" id="height" name="height"
+                                            placeholder="Height (cm)" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="body_fat_percentage"></label>
+                                        <input type="text" id="body_fat_percentage" name="body_fat_percentage"
+                                            placeholder="Body fat percentage" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="resting_heart_rate"></label>
+                                        <input type="text" id="resting_heart_rate" name="resting_heart_rate"
+                                            placeholder="Resting heart rate" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="blood_pressure_systolic"></label>
+                                        <input type="number" step=".01" id="blood_pressure_systolic"
+                                            name="blood_pressure_systolic" placeholder="Blood pressure systolic"
+                                            class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="blood_pressure_diastolic"></label>
+                                        <input type="number" step=".01" id="blood_pressure_diastolic"
+                                            name="blood_pressure_diastolic" placeholder="Blood pressure diastolic"
+                                            class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="notes"></label>
+                                        <textarea name="notes" id="notes" placeholder="Notes"
+                                            class="form-control"></textarea>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="submit"
+                                class="subscribe btn btn-primary btn-block rounded-pill shadow-sm mt-4">
+                                Confirm </button>
+                        </form>
+                    </div>
+                </div>
+                <!-- End -->
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const addButton = document.getElementById('add-class-btn');
+        const classForm = document.getElementById('class-form');
+        const classTable = document.getElementById('class-table');
+
+        addButton.addEventListener('click', () => {
+            classForm.style.display = 'block'; // Show the form
+            classTable.style.display = 'none'; // Show the form
+
+        });
+    </script>
+
+    {% endblock %}

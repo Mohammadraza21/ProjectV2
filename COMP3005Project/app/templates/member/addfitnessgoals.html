@@ -1,0 +1,81 @@
+{% extends 'member/layout.html' %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    {% include "includes/alert.html" %}
+
+    <div class="row">
+        <div class="col-lg-7 mx-auto shadow-sm p-5">
+            <div class="tab-content">
+                <div id="nav-tab-card" class="tab-pane fade show active">
+                    <div class="msg">{{ msg }}</div>
+                    <form role="form" action="{{ url_for('fitnessgoals') }}" method="post">
+                        <div class="row">
+
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="goal_type"></label>
+                                    <input type="text" id="goal_type" name="goal_type" placeholder="Goal Type"
+                                        class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="startdate"></label>
+                                    <input placeholder="Start Date" class="form-control" type="text"
+                                        onfocus="(this.type='date')" onblur="(this.type='text')" id="startdate"
+                                        name="startdate" required />
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="enddate"></label>
+                                    <input placeholder="End Date" class="form-control" type="text"
+                                        onfocus="(this.type='date')" onblur="(this.type='text')" id="enddate"
+                                        name="enddate" required />
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="target_value"></label>
+                                    <input type="number" step=".01" id="target_value" name="target_value"
+                                        placeholder="Target Value" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="progress"></label>
+                                    <input type="number" step=".01" id="progress" name="progress" placeholder="Progress"
+                                        class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="goalnotes"></label>
+                                    <textarea name="goalnotes" id="goalnotes" placeholder="Notes"
+                                        class="form-control"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="subscribe btn btn-primary btn-block rounded-pill shadow-sm mt-4">
+                            Confirm </button>
+                    </form>
+                </div>
+            </div>
+            <!-- End -->
+
+        </div>
+    </div>
+
+</div>
+{% endblock %}
